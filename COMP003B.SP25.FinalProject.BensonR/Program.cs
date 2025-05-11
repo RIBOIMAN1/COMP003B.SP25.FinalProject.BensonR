@@ -2,7 +2,8 @@
 // Course: COMP-003B: ASP.NET Core
 // Instructor: Jonathan Cruz
 // Purpose: Final project synthesizing MVC, Web API, EF Core, and middleware
-
+using COMP003B.SP25.FinalProject.BensonR.Data;
+using Microsoft.EntityFrameworkCore;
 namespace COMP003B.SP25.FinalProject.BensonR
 {
     public class Program
@@ -13,11 +14,14 @@ namespace COMP003B.SP25.FinalProject.BensonR
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+			builder.Services.AddDbContext<ComputerContext>(options =>
+	            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+			var app = builder.Build();
+			builder.Configuration.AddJsonFile("secrets.json", optional: false, reloadOnChange: true);
+			builder.Configuration.AddUserSecrets<Program>();
 
-            var app = builder.Build();
-
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
+			// Configure the HTTP request pipeline.
+			if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
