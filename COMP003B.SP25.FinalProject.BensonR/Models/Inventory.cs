@@ -4,6 +4,7 @@ namespace COMP003B.SP25.FinalProject.BensonR.Models
 {
 	public class Inventory
 	{
+		public int InventoryId { get; set; }
 		public int TechnicianId { get; set; }
 		[Required]
 		public string Name { get; set; }
