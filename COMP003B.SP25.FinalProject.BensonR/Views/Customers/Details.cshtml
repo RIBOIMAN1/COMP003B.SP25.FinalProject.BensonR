@@ -25,7 +25,16 @@
         </dd>
     </dl>
 </div>
+<div class="col-md-4">
+    <h4>Repair Tickets</h4>
+    <ul>
+        @foreach (var repairTicket in ViewBag.RepairTickets)
+        {
+            <li>Ticket ID: @repairTicket.Id | Technician: @repairTicket.Technician.Name</li>
+        }
+    </ul>
+</div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.CustomerId">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model?.CustomerId">Edit</a>
     <a asp-action="Index">Back to List</a>
 </div>

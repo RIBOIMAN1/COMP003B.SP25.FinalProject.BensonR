@@ -39,8 +39,13 @@ namespace COMP003B.SP25.FinalProject.BensonR.Controllers
             {
                 return NotFound();
             }
+			ViewBag.RepairTickets = from c in _context.Customers
+									join rt in _context.RepairTickets on c.CustomerId equals rt.CustomerId
+									join t in _context.Technicians on rt.TechnicianId equals t.TechnicianId
+									where c.CustomerId == id
+									select rt;
 
-            return View(customer);
+			return View(customer);
         }
 
         // GET: Customers/Create
