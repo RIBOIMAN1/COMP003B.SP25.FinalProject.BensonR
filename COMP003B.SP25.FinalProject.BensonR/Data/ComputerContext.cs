@@ -9,7 +9,6 @@ namespace COMP003B.SP25.FinalProject.BensonR.Data
 		public ComputerContext(DbContextOptions<ComputerContext> options) : base(options)
 		{
 		}
-
 		public DbSet<Customer> Customers { get; set; }
 		public DbSet<Technician> Technicians { get; set; }
 		public DbSet<RepairTicket> RepairTickets { get; set; }

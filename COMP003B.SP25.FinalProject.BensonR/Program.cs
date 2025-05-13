@@ -3,6 +3,7 @@
 // Instructor: Jonathan Cruz
 // Purpose: Final project synthesizing MVC, Web API, EF Core, and middleware
 using COMP003B.SP25.FinalProject.BensonR.Data;
+using COMP003B.SP25.FinalProject.BensonR.Middleware;
 using Microsoft.EntityFrameworkCore;
 namespace COMP003B.SP25.FinalProject.BensonR
 {
@@ -16,6 +17,7 @@ namespace COMP003B.SP25.FinalProject.BensonR
 			builder.Services.AddControllersWithViews();
 			builder.Services.AddDbContext<ComputerContext>(options =>
 				options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+			builder.Services.AddLogging();
 			var app = builder.Build();
 
 			// Configure the HTTP request pipeline.
@@ -29,6 +31,7 @@ namespace COMP003B.SP25.FinalProject.BensonR
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();
 
+			app.UseMiddleware<RequestTimingMiddleware>();
 			app.UseRouting();
 
 			app.UseAuthorization();
